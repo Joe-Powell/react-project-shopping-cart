@@ -1,38 +1,105 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  background-image: url('./images/phone1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height:150px;
+  position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 60px;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+ padding: 5px;
+  background-color: white;
+}
+
+.cart ion-icon {
+  vertical-align: bottom;
+  font-size: 20px;
+  padding-right: 5px;
+}
+
+.cart a {
+  cursor: pointer;
+  color:white;
+  background-color: royalblue;
+
+}
+
+.container {
+
+  display:flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  /* width:80vw; */
+  /* margin:auto; */
+  margin-top: 40px;;
+  padding: 50px;
+  
+ 
 }
 
-.App-link {
-  color: #61dafb;
+.image {
+  margin:0 20px;
+  position: relative;
+   overflow: hidden;  
+   background:rgb(171, 202, 212);
+   /* padding: 20px; */
+   margin: 10px;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.addToCart {
+  position: absolute;
+  width: 100%;
+ 
+  background:black;
+  transition: all 0.7s ease-in-out;
+  opacity:0; 
+  cursor: pointer;
+  text-align: center;
+  color: red;
+  font-weight: 800;
+ 
+}
+
+
+.image:hover .cart1,
+.image:hover .cart2,
+.image:hover .cart3,
+.image:hover .cart4 {
+  bottom:55px;
+  opacity: 1;
+  padding-bottom: 2px;
+  text-decoration: none;
+
+
+
+}
+
+.addToCart:hover {
+
+  color:blueviolet;
 }
