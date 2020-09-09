@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getNumbers } from '../actions/getAction';
+import { Link } from 'react-router-dom';
+
+function NavBar(props) {
 
 
-function NavBar() {
+    useEffect(() => {
+        getNumbers();
+
+
+    }, []);
+
+
+
     return (
         <header>
             <nav>
-            <h2>Shop</h2>
-            <ul>
-                <li><a href='#'>Home</a></li>
-                <li><a href='#'>About</a></li>
-                <li className='cart'><a href='#'>
-                <ion-icon name="basket-outline"></ion-icon>Cart<span> 0</span></a></li>
-            </ul>
+                <h2>Shop</h2>
+                <ul>
+                    <li><Link to='/'>Home {props.name}</Link></li>
+                    <li><Link to='/about'>About</Link></li>
+                    <li className='cart'><Link to='/cart'>
+                        <ion-icon name="basket-outline"></ion-icon>Cart<span> {props.basketProps.basketNumbers}</span></Link></li>
+                </ul>
             </nav>
-      </header>
+        </header>
 
     );
 }
 
-export default NavBar;
+
+const mapStateToProps = state => ({
+    basketProps: state.basketState
+})
+
+
+export default connect(mapStateToProps, { getNumbers })(NavBar); 
