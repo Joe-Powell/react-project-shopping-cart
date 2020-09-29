@@ -10,7 +10,7 @@ import { addBasket } from '../actions/addAction';
 
 
 const Home = (props) => {
-    //console.log('props', props);
+    console.log('props', props);
 
 
     return (
@@ -58,5 +58,7 @@ const Home = (props) => {
 /* Connect takes two parameters: One function mapStateToProps which maps parts of the state into your components props
 the second one, a function mapDispatchToProps " {addBasket} below", to modify the state which maps functions into your 
 props which are, when called, dispatch an action to redux store. 
-We can either retrieve data by obtaining its current state, or change its state by dispatching an action*/
+We can either retrieve data by obtaining its current state, or add a action function and  change its state by dispatching an action
+so the second parameter does  2 things. it modifies the state and makes the function availabe in the props
+*/
 export default connect(null, { addBasket })(Home); 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { productQuantity } from '../actions/productQuantity';
+import { productQuantity, clearProduct } from '../actions/productQuantity';
 
 import firstPhone from '../images/phone1.jpg';
 import secondPhone from '../images/phone2.jpg';
@@ -9,7 +9,7 @@ import fourthPhone from '../images/phone4.jpg';
 
 // { basketProps } is the same as props.basketProps and props.productQuantity. this is destructuring. 
 // so thats why below, you can use basketProps and productQuantity without putting props.
-function Cart({ basketProps, productQuantity }) {
+function Cart({ basketProps, productQuantity, clearProduct }) {
     console.log(basketProps);
 
     let productsInCart = [];
@@ -41,22 +41,19 @@ function Cart({ basketProps, productQuantity }) {
         console.log('product ', product);
         console.log('index ', index);
         return (
-            <Fragment>
+            <Fragment key={index}>
                 <div className='product'>
-                    <ion-icon name="close-circle-outline"></ion-icon>
+                    <ion-icon onClick={() => clearProduct(product.name)} name="close-circle-outline"></ion-icon>
                     <img src={productImages(product)} />
                     <span className='sm-hide'>{product.name}</span>
                 </div>
                 <div className="price sm-hide">${product.price}.00</div>
                 <div className="quantity">
-                    <ion-icon onClick={() => productQuantity('decrease')} className='decrease' name="arrow-back-circle-outline"></ion-icon>
+                    <ion-icon onClick={() => productQuantity('decrease', product.name)} className='decrease' name="arrow-back-circle-outline"></ion-icon>
                     <span>{product.numbers}</span>
-                    <ion-icon onClick={() => productQuantity('increase')} className='increase' name="arrow-forward-circle-outline"></ion-icon>
-
-
-
-
+                    <ion-icon onClick={() => productQuantity('increase', product.name)} className='increase' name="arrow-forward-circle-outline"></ion-icon>
                 </div>
+                <div className="total">${product.numbers * product.price}.00</div>
 
             </Fragment>
 
@@ -81,7 +78,7 @@ function Cart({ basketProps, productQuantity }) {
             </div>
             <div className="basketTotalContainer">
                 <h4 className="basketTotalTitle">Basket Total </h4>
-                <h4 className="basketTotal ">{basketProps.cartCost},00</h4>
+                <h4 className="basketTotal ">{basketProps.cartCost}.00</h4>
             </div>
         </div>
     )
@@ -105,5 +102,7 @@ const mapStateToProps = state => (
 
 // connect is a higher order function and is grabbing from the store and then adding to props of Cart. 
 //connect pushes mapStateToProps into the global state and gives Cart access in props
-// the second parameter is for sending to the state, pushing in and making changes in state
-export default connect(mapStateToProps, { productQuantity })(Cart); 
+// the second parameter is for sending to the state, pushing in and making changes in state, as well as making the function itself available in the props
+export default connect(mapStateToProps, { productQuantity, clearProduct })(Cart);
+
+// took out  ,{ productQuantity } for now
